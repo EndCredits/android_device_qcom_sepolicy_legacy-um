@@ -27,6 +27,10 @@
 
 
 type vendor_poweroptservice, domain;
+
+#mark as hal server domain
+hal_server_domain(vendor_poweroptservice, vendor_hal_poweroptservice)
+
 type vendor_poweroptservice_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(vendor_poweroptservice)
@@ -35,6 +39,13 @@ hwbinder_use(vendor_poweroptservice)
 
 hal_client_domain(vendor_poweroptservice, vendor_hal_perf)
 hal_client_domain(vendor_poweroptservice, hal_graphics_composer)
+
+#allow hwbinder call bw client and server
+binder_call(vendor_hal_poweroptservice_client, vendor_hal_poweroptservice_server)
+binder_call(vendor_hal_poweroptservice_server, vendor_hal_poweroptservice_client)
+
+#allow service to be added to hwservice list
+hal_attribute_hwservice(vendor_hal_poweroptservice, vendor_hal_poweroptservice_hwservice)
 
 get_prop(vendor_poweroptservice, vendor_mpctl_prop)
 
@@ -46,3 +57,12 @@ allow vendor_poweroptservice vendor_qdisplay_service:service_manager find;
 allow vendor_poweroptservice input_device:dir r_dir_perms;
 allow vendor_poweroptservice input_device:chr_file r_file_perms;
 dontaudit vendor_poweroptservice self:capability kill;
+
+allow vendor_poweroptservice vendor_sysfs_scsi_host:dir r_dir_perms;
+allow vendor_poweroptservice vendor_sysfs_scsi_host:file rw_file_perms;
+
+get_prop(vendor_poweroptservice, vendor_display_prop)
+get_prop(vendor_poweroptservice, vendor_soc_name_prop)
+
+allow vendor_poweroptservice vendor_pm_data_file:dir create_dir_perms;
+allow vendor_poweroptservice vendor_pm_data_file:file create_file_perms;

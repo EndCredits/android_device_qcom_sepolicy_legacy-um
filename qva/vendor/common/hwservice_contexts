@@ -82,3 +82,5 @@ vendor.qti.hardware.perf::IPerfCallback                      u:object_r:vendor_h
 vendor.qti.hardware.mwqemadapter::IMwqemAdapter              u:object_r:vendor_hal_mwqemadapter_hwservice:s0
 vendor.qti.hardware.wifi.wificfr::IWificfr                   u:object_r:hal_wificfr_hwservice:s0
 vendor.qti.hardware.sxrhal::ISxrCrypto                       u:object_r:vendor_sxrhalservice_hwservice:s0
+vendor.qti.hardware.power.powermodule::IPowerModule          u:object_r:vendor_hal_poweroptservice_hwservice:s0
+vendor.qti.hardware.perf::IPerf                                 u:object_r:vendor_hal_perf_hwservice:s0
